@@ -1,15 +1,79 @@
 .simple-control {
-    -fx-padding:          5;
-    -fx-background-color: rgb(12, 12, 12);
-    -base-color:          rgb(2, 138, 204);
+    -fx-padding: 5;
+    -fx-background-color: white;
 }
 
 .simple-control .background-circle {
-    -fx-fill: -base-color;
+    -fx-fill: transparent;
+}
+
+.simple-control .maxMwhArc {
+    -fx-stroke-width   : 30;
+    -fx-stroke         : #6BD098;
+    -fx-stroke-line-cap: round;
+    -fx-fill           : transparent;
+}
+
+.simple-control .currentMwh2015Arc {
+    -fx-stroke-width   : 30;
+    -fx-stroke         : #CC3D86;
+    -fx-stroke-line-cap: round;
+    -fx-fill           : transparent;
+}
+
+.simple-control .currentMwh2016Arc {
+    -fx-stroke-width   : 30;
+    -fx-stroke         : #FDD200;
+    -fx-stroke-line-cap: round;
+    -fx-fill           : transparent;
+}
+
+.simple-control .currentMwh2017Arc {
+    -fx-stroke-width   : 30;
+    -fx-stroke         : #E86E01;
+    -fx-stroke-line-cap: round;
+    -fx-fill           : transparent;
+}
+
+.simple-control .currentMwh2018Arc {
+    -fx-stroke-width   : 30;
+    -fx-stroke         : #E02716;
+    -fx-stroke-line-cap: round;
+    -fx-fill           : transparent;
+}
+
+.simple-control .thumb2015 {
+    -fx-stroke         : #CC3D86;
+    -fx-stroke-width   : 2;
+    -fx-fill           : white;
+}
+
+.simple-control .thumb2016 {
+    -fx-stroke         : #FDD200;
+    -fx-stroke-width   : 2;
+    -fx-fill           : white;
+}
+
+.simple-control .thumb2017 {
+    -fx-stroke         : #E86E01;
+    -fx-stroke-width   : 2;
+    -fx-fill           : white;
+}
+
+.simple-control .thumb2018 {
+    -fx-stroke         : #E02716;
+    -fx-stroke-width   : 2;
+    -fx-fill           : white;
+}
+
+.simple-control .operationButton {
+    -fx-background-image: url("icons/plugOff.png");
+    -fx-background-repeat: no-repeat;
 }
 
 .simple-control .display {
     -fx-font-family: 'Lato Light';
-    -fx-font-size:   24;
-    -fx-fill:        derive(-base-color, 90%);
+    -fx-font-size: 24;
+    -fx-fill: derive(-base-color, 95%);
 }
+

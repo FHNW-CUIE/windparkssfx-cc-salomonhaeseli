@@ -19,9 +19,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
@@ -50,22 +53,35 @@ public class SimpleControl extends Region {
 
     private static final Locale CH = new Locale("de", "CH");
 
-    private static final double ARTBOARD_WIDTH  = 100;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 100;  // ToDo: Anpassen an die Breite der Zeichnung
+    private static final double ARTBOARD_WIDTH  = 800;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_HEIGHT = 800;  // ToDo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
-    private static final double MINIMUM_WIDTH  = 25;    // ToDo: Anpassen
+    private static final double MINIMUM_WIDTH  = 200;    // ToDo: Anpassen
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
 
-    private static final double MAXIMUM_WIDTH = 800;    // ToDo: Anpassen
+    private static final double MAXIMUM_WIDTH = 3000;    // ToDo: Anpassen
 
     // ToDo: diese Parts durch alle notwendigen Parts der gewünschten CustomControl ersetzen
-    private Circle backgroundCircle;
-    private Text   display;
+    private Circle  backgroundCircle;
+    private Circle  thumb2015;
+    private Circle  thumb2016;
+    private Circle  thumb2017;
+    private Circle  thumb2018;
+    private Arc maxMwhArc;
+    private Arc     currentMwh2015Arc;
+    private Arc     currentMwh2016Arc;
+    private Arc     currentMwh2017Arc;
+    private Arc     currentMwh2018Arc;
+    private Button operatingButton;
 
     // ToDo: ersetzen durch alle notwendigen Properties der CustomControl
-    private final DoubleProperty value = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2015 = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2016 = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2017 = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2018 = new SimpleDoubleProperty();
+    private final DoubleProperty maxMwh         = new SimpleDoubleProperty();
 
     // ToDo: ergänzen mit allen CSS stylable properties
     private static final CssMetaData<SimpleControl, Color> BASE_COLOR_META_DATA = FACTORY.createColorCssMetaData("-base-color", s -> s.baseColor);
@@ -79,20 +95,6 @@ public class SimpleControl extends Region {
     };
 
     // ToDo: Loeschen falls keine getaktete Animation benoetigt wird
-    private final BooleanProperty          blinking = new SimpleBooleanProperty(false);
-    private final ObjectProperty<Duration> pulse    = new SimpleObjectProperty<>(Duration.seconds(1.0));
-
-    private final AnimationTimer timer = new AnimationTimer() {
-        private long lastTimerCall;
-
-        @Override
-        public void handle(long now) {
-            if (now > lastTimerCall + (getPulse().toMillis() * 1_000_000L)) {
-                performPeriodicTask();
-                lastTimerCall = now;
-            }
-        }
-    };
 
     // ToDo: alle Animationen und Timelines deklarieren
 
@@ -122,19 +124,55 @@ public class SimpleControl extends Region {
 
     private void initializeParts() {
         //ToDo: alle deklarierten Parts initialisieren
-        double center = ARTBOARD_WIDTH * 0.5;
+        //ToDo: alle deklarierten Parts initialisieren
+        double  centerX     = ARTBOARD_WIDTH * 0.5;
+        double  centerY     = ARTBOARD_HEIGHT * 0.5;
+        int     width       = 15;
+        double  radius      = centerX - width;
+        double  radius2015  = ((centerX - width)-40);
+        double  radius2016  = radius2015-40;
+        double  radius2017  = radius2016-40;
+        double  radius2018  = radius2017-40;
 
-        backgroundCircle = new Circle(center, center, center);
+        backgroundCircle = new Circle(centerX, centerX, centerX);
         backgroundCircle.getStyleClass().add("background-circle");
 
-        display = createCenteredText("display");
+        maxMwhArc = new Arc(centerX, centerX, radius, radius, 0, 360.0);
+        maxMwhArc.getStyleClass().add("maxMwhArc");
+        maxMwhArc.setType(ArcType.CHORD);
+
+        currentMwh2015Arc = new Arc(centerX, centerX, radius2015, radius2015, +90, 180);
+        currentMwh2015Arc.getStyleClass().add("currentMwh2015Arc");
+        currentMwh2015Arc.setType(ArcType.OPEN);
+
+        currentMwh2016Arc = new Arc(centerX, centerX, radius2016, radius2016, +90, 180);
+        currentMwh2016Arc.getStyleClass().add("currentMwh2016Arc");
+        currentMwh2016Arc.setType(ArcType.OPEN);
+
+        currentMwh2017Arc = new Arc(centerX, centerX, radius2017, radius2017, +90, 180);
+        currentMwh2017Arc.getStyleClass().add("currentMwh2017Arc");
+        currentMwh2017Arc.setType(ArcType.OPEN);
+
+        currentMwh2018Arc = new Arc(centerX, centerX, radius2018, radius2018, +90, 180);
+        currentMwh2018Arc.getStyleClass().add("currentMwh2018Arc");
+
+        thumb2015 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2015.getStyleClass().add("thumb2015");
+        thumb2016 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2016.getStyleClass().add("thumb2016");
+        thumb2017 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2017.getStyleClass().add("thumb2017");
+        thumb2018 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2018.getStyleClass().add("thumb2018");
+
+        operatingButton = createCenteredButton(centerX, centerY, "operationButton");
     }
 
     private void initializeDrawingPane() {
         drawingPane = new Pane();
         drawingPane.getStyleClass().add("drawing-pane");
-        drawingPane.setMaxSize(ARTBOARD_WIDTH,  ARTBOARD_HEIGHT);
-        drawingPane.setMinSize(ARTBOARD_WIDTH,  ARTBOARD_HEIGHT);
+        drawingPane.setMaxSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
+        drawingPane.setMinSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
         drawingPane.setPrefSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
     }
 
@@ -144,26 +182,77 @@ public class SimpleControl extends Region {
 
     private void layoutParts() {
         //ToDo: alle Parts zur drawingPane hinzufügen
-        drawingPane.getChildren().addAll(backgroundCircle, display);
+        drawingPane.getChildren().addAll(backgroundCircle, maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc, currentMwh2018Arc, thumb2015, thumb2016, thumb2017, thumb2018,
+                operatingButton);
 
         getChildren().add(drawingPane);
     }
 
     private void setupEventHandlers() {
         //ToDo: bei Bedarf ergänzen
+        thumb2015.setOnMouseDragged(event -> {
+            double newValue = radialMousePositionToValue(event.getX(),event.getY(),ARTBOARD_WIDTH*0.5, ARTBOARD_HEIGHT*0.5, 0, getMaxMwh());
+            setCurrentMwh2015(newValue);
+        });
+
+        thumb2016.setOnMouseDragged(event -> {
+            double newValue = radialMousePositionToValue(event.getX(),event.getY(),ARTBOARD_WIDTH*0.5, ARTBOARD_HEIGHT*0.5, 0, getMaxMwh());
+            setCurrentMwh2016(newValue);
+        });
+
+        thumb2017.setOnMouseDragged(event -> {
+            double newValue = radialMousePositionToValue(event.getX(),event.getY(),ARTBOARD_WIDTH*0.5, ARTBOARD_HEIGHT*0.5, 0, getMaxMwh());
+            setCurrentMwh2017(newValue);
+        });
+
+        thumb2018.setOnMouseDragged(event -> {
+            double newValue = radialMousePositionToValue(event.getX(),event.getY(),ARTBOARD_WIDTH*0.5, ARTBOARD_HEIGHT*0.5, 0, getMaxMwh());
+            setCurrentMwh2018(newValue);
+        });
     }
 
     private void setupValueChangeListeners() {
         //ToDo: durch die Listener auf die Properties des Custom Controls ersetzen
-        valueProperty().addListener((observable, oldValue, newValue) -> updateUI());
+        currentMwh2015Property().addListener(((observable, oldValue, newValue) -> {
+            double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
+            currentMwh2015Arc.setLength(-arcSize);
 
-        // fuer die getaktete Animation
-        blinking.addListener((observable, oldValue, newValue) -> startClockedAnimation(newValue));
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH*0.5,ARTBOARD_HEIGHT*0.5, (ARTBOARD_WIDTH*0.5)-16, arcSize);
+            thumb2015.setCenterX(p.getX());
+            thumb2015.setCenterY(p.getY());
+        }));
+
+        currentMwh2016Property().addListener(((observable, oldValue, newValue) -> {
+            double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
+            currentMwh2016Arc.setLength(-arcSize);
+
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH*0.5,ARTBOARD_HEIGHT*0.5, (ARTBOARD_WIDTH*0.5)-16, arcSize);
+            thumb2016.setCenterX(p.getX());
+            thumb2016.setCenterY(p.getY());
+        }));
+
+        currentMwh2017Property().addListener(((observable, oldValue, newValue) -> {
+            double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
+            currentMwh2017Arc.setLength(-arcSize);
+
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH*0.5,ARTBOARD_HEIGHT*0.5, (ARTBOARD_WIDTH*0.5)-16, arcSize);
+            thumb2017.setCenterX(p.getX());
+            thumb2017.setCenterY(p.getY());
+        }));
+
+        currentMwh2018Property().addListener(((observable, oldValue, newValue) -> {
+            double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
+            currentMwh2018Arc.setLength(-arcSize);
+
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH*0.5,ARTBOARD_HEIGHT*0.5, (ARTBOARD_WIDTH*0.5)-16, arcSize);
+            thumb2018.setCenterX(p.getX());
+            thumb2018.setCenterY(p.getY());
+        }));
+
     }
 
     private void setupBindings() {
         //ToDo: dieses Binding ersetzen
-        display.textProperty().bind(valueProperty().asString(CH, "%.2f"));
     }
 
     private void updateUI(){
@@ -176,11 +265,7 @@ public class SimpleControl extends Region {
     }
 
     private void startClockedAnimation(boolean start) {
-        if (start) {
-            timer.start();
-        } else {
-            timer.stop();
-        }
+
     }
 
     @Override
@@ -366,8 +451,8 @@ public class SimpleControl extends Region {
      * @param styleClass mit dieser StyleClass kann der erzeugte Text via css gestyled werden
      * @return Text
      */
-    private Text createCenteredText(String styleClass) {
-        return createCenteredText(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, styleClass);
+    private Button createCenteredButton(String styleClass) {
+        return createCenteredButton(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, styleClass);
     }
 
     /**
@@ -379,18 +464,16 @@ public class SimpleControl extends Region {
      * @param styleClass mit dieser StyleClass kann der erzeugte Text via css gestyled werden
      * @return Text
      */
-    private Text createCenteredText(double cx, double cy, String styleClass) {
-        Text text = new Text();
-        text.getStyleClass().add(styleClass);
-        text.setTextOrigin(VPos.CENTER);
-        text.setTextAlignment(TextAlignment.CENTER);
-        double width = cx > ARTBOARD_WIDTH * 0.5 ? ((ARTBOARD_WIDTH - cx) * 2.0) : cx * 2.0;
-        text.setWrappingWidth(width);
-        text.setBoundsType(TextBoundsType.VISUAL);
-        text.setY(cy);
-        text.setX(cx - (width / 2.0));
+    private Button createCenteredButton(double cx, double cy, String styleClass) {
+        Button button = new Button();
+        button.getStyleClass().add(styleClass);
+        button.setTextAlignment(TextAlignment.CENTER);
+        button.setPrefWidth(67);
+        button.setPrefHeight(67);
+        button.setLayoutY(cy-(button.getHeight()/2));
+        button.setLayoutX(cx-(button.getWidth()/2));
 
-        return text;
+        return button;
     }
 
     /**
@@ -471,18 +554,6 @@ public class SimpleControl extends Region {
     // alle getter und setter  (generiert via "Code -> Generate... -> Getter and Setter)
 
     // ToDo: ersetzen durch die Getter und Setter Ihres CustomControls
-    public double getValue() {
-        return value.get();
-    }
-
-    public DoubleProperty valueProperty() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value.set(value);
-    }
-
     public Color getBaseColor() {
         return baseColor.get();
     }
@@ -495,27 +566,63 @@ public class SimpleControl extends Region {
         this.baseColor.set(baseColor);
     }
 
-    public boolean isBlinking() {
-        return blinking.get();
+    public double getMaxMwh() {
+        return maxMwh.get();
     }
 
-    public BooleanProperty blinkingProperty() {
-        return blinking;
+    public DoubleProperty maxMwhProperty() {
+        return maxMwh;
     }
 
-    public void setBlinking(boolean blinking) {
-        this.blinking.set(blinking);
+    public void setMaxMwh(double maxMwh) {
+        this.maxMwh.set(maxMwh);
     }
 
-    public Duration getPulse() {
-        return pulse.get();
+    public double getCurrentMwh2015() {
+        return currentMwh2015.get();
     }
 
-    public ObjectProperty<Duration> pulseProperty() {
-        return pulse;
+    public DoubleProperty currentMwh2015Property() {
+        return currentMwh2015;
     }
 
-    public void setPulse(Duration pulse) {
-        this.pulse.set(pulse);
+    public void setCurrentMwh2015(double currentMwh2015) {
+        this.currentMwh2015.set(currentMwh2015);
+    }
+
+    public double getCurrentMwh2016() {
+        return currentMwh2016.get();
+    }
+
+    public DoubleProperty currentMwh2016Property() {
+        return currentMwh2016;
+    }
+
+    public void setCurrentMwh2016(double currentMwh2016) {
+        this.currentMwh2016.set(currentMwh2016);
+    }
+
+    public double getCurrentMwh2017() {
+        return currentMwh2017.get();
+    }
+
+    public DoubleProperty currentMwh2017Property() {
+        return currentMwh2017;
+    }
+
+    public void setCurrentMwh2017(double currentMwh2017) {
+        this.currentMwh2017.set(currentMwh2017);
+    }
+
+    public double getCurrentMwh2018() {
+        return currentMwh2018.get();
+    }
+
+    public DoubleProperty currentMwh2018Property() {
+        return currentMwh2018;
+    }
+
+    public void setCurrentMwh2018(double currentMwh2018) {
+        this.currentMwh2018.set(currentMwh2018);
     }
 }

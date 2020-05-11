@@ -4,10 +4,12 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import cuie.stoffiifee_salomonhaeseli.template_simplecontrol.SimpleControl;
+import javafx.util.converter.NumberStringConverter;
 
 public class DemoPane extends BorderPane {
 
@@ -17,8 +19,11 @@ public class DemoPane extends BorderPane {
     private SimpleControl cc;
 
     // all controls
-    private Slider      slider;
-    private ColorPicker colorPicker;
+    private TextField maxMwh;
+    private TextField currentMwh2015;
+    private TextField currentMwh2016;
+    private TextField currentMwh2017;
+    private TextField currentMwh2018;
 
     public DemoPane(PresentationModel pm) {
         this.pm = pm;
@@ -31,16 +36,21 @@ public class DemoPane extends BorderPane {
         setPadding(new Insets(10));
 
         cc = new SimpleControl();
-
-        slider = new Slider();
-        slider.setShowTickLabels(true);
-
-        colorPicker = new ColorPicker();
+        maxMwh = new TextField();
+        currentMwh2015 = new TextField();
+        currentMwh2016 = new TextField();
+        currentMwh2017 = new TextField();
+        currentMwh2018 = new TextField();
     }
 
     private void layoutControls() {
-        VBox controlPane = new VBox(new Label("SimpleControl Properties"),
-                                    slider, colorPicker);
+        VBox controlPane = new VBox(
+                new Label("Gesamtproduktion"), maxMwh,
+                new Label("Produktion 2015 (MwH)"), currentMwh2015,
+                new Label("Produktion 2016 (MwH)"), currentMwh2016,
+                new Label("Produktion 2017 (MwH)"), currentMwh2017,
+                new Label("Produktion 2018 (MwH)"), currentMwh2018);
+
         controlPane.setPadding(new Insets(0, 50, 0, 50));
         controlPane.setSpacing(10);
 
@@ -49,12 +59,21 @@ public class DemoPane extends BorderPane {
     }
 
     private void setupBindings() {
-        slider.valueProperty().bindBidirectional(pm.pmValueProperty());
-        colorPicker.valueProperty().bindBidirectional(pm.baseColorProperty());
+        //bindings for the "demo controls"
+        maxMwh.textProperty().bindBidirectional(pm.maxMwhProperty(), new NumberStringConverter());
+        currentMwh2015.textProperty().bindBidirectional(pm.currentMwh2015Property(), new NumberStringConverter());
+        currentMwh2016.textProperty().bindBidirectional(pm.currentMwh2016Property(), new NumberStringConverter());
+        currentMwh2017.textProperty().bindBidirectional(pm.currentMwh2017Property(), new NumberStringConverter());
+        currentMwh2018.textProperty().bindBidirectional(pm.currentMwh2018Property(), new NumberStringConverter());
 
 
-        cc.valueProperty().bindBidirectional(pm.pmValueProperty());
-        cc.baseColorProperty().bindBidirectional(pm.baseColorProperty());
+
+        //bindings for the Custom Control
+        cc.maxMwhProperty().bindBidirectional(pm.maxMwhProperty());
+        cc.currentMwh2015Property().bindBidirectional(pm.currentMwh2015Property());
+        cc.currentMwh2016Property().bindBidirectional(pm.currentMwh2016Property());
+        cc.currentMwh2017Property().bindBidirectional(pm.currentMwh2017Property());
+        cc.currentMwh2018Property().bindBidirectional(pm.currentMwh2018Property());
     }
 
 }
