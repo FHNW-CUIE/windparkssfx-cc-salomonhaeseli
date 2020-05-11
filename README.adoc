@@ -2,7 +2,8 @@
 
 === Bearbeitet von
 
-* _Vorname Nachname_
+* Sophie-Marie Ordelman
+* Salomon Häseli
 
 === Integriert in die OOP2-Projekte von
 
