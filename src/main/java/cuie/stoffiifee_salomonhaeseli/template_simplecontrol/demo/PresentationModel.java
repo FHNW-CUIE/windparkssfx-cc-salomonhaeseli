@@ -1,15 +1,15 @@
 package cuie.stoffiifee_salomonhaeseli.template_simplecontrol.demo;
 
 import javafx.beans.property.*;
-import javafx.scene.paint.Color;
 
 public class PresentationModel {
-    private final StringProperty demoTitle  =   new SimpleStringProperty("Spinning Control Demo");
+    private final StringProperty demoTitle      =   new SimpleStringProperty("Spinning Control Demo");
     private final DoubleProperty currentMwh2015 =   new SimpleDoubleProperty(1);
     private final DoubleProperty currentMwh2016 =   new SimpleDoubleProperty(1);
     private final DoubleProperty currentMwh2017 =   new SimpleDoubleProperty(1);
     private final DoubleProperty currentMwh2018 =   new SimpleDoubleProperty(10000);
-    private final DoubleProperty maxMwh =   new SimpleDoubleProperty(300000);
+    private final DoubleProperty maxMwh         =   new SimpleDoubleProperty(300000);
+    private final BooleanProperty operating     = new SimpleBooleanProperty();
 
     // all getters and setters (generated via "Code -> Generate -> Getter and Setter)
 
@@ -83,5 +83,17 @@ public class PresentationModel {
 
     public void setCurrentMwh2018(double currentMwh2018) {
         this.currentMwh2018.set(currentMwh2018);
+    }
+
+    public boolean getOperating() {
+        return operating.get();
+    }
+
+    public BooleanProperty operatingProperty() {
+        return operating;
+    }
+
+    public void setOperating(boolean operating) {
+        this.operating.set(operating);
     }
 }

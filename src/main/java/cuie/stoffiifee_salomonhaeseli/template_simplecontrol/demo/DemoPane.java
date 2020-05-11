@@ -1,9 +1,7 @@
 package cuie.stoffiifee_salomonhaeseli.template_simplecontrol.demo;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -74,6 +72,7 @@ public class DemoPane extends BorderPane {
         cc.currentMwh2016Property().bindBidirectional(pm.currentMwh2016Property());
         cc.currentMwh2017Property().bindBidirectional(pm.currentMwh2017Property());
         cc.currentMwh2018Property().bindBidirectional(pm.currentMwh2018Property());
+        cc.operatingProperty().bindBidirectional(pm.operatingProperty());
     }
 
 }

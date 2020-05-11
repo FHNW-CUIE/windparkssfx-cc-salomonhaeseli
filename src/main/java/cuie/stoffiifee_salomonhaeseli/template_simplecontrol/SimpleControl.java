@@ -77,11 +77,12 @@ public class SimpleControl extends Region {
     private Button operatingButton;
 
     // ToDo: ersetzen durch alle notwendigen Properties der CustomControl
-    private final DoubleProperty currentMwh2015 = new SimpleDoubleProperty();
-    private final DoubleProperty currentMwh2016 = new SimpleDoubleProperty();
-    private final DoubleProperty currentMwh2017 = new SimpleDoubleProperty();
-    private final DoubleProperty currentMwh2018 = new SimpleDoubleProperty();
-    private final DoubleProperty maxMwh         = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2015         = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2016         = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2017         = new SimpleDoubleProperty();
+    private final DoubleProperty currentMwh2018         = new SimpleDoubleProperty();
+    private final DoubleProperty maxMwh                 = new SimpleDoubleProperty();
+    private final BooleanProperty operating             = new SimpleBooleanProperty();
 
     // ToDo: ergänzen mit allen CSS stylable properties
     private static final CssMetaData<SimpleControl, Color> BASE_COLOR_META_DATA = FACTORY.createColorCssMetaData("-base-color", s -> s.baseColor);
@@ -624,5 +625,17 @@ public class SimpleControl extends Region {
 
     public void setCurrentMwh2018(double currentMwh2018) {
         this.currentMwh2018.set(currentMwh2018);
+    }
+
+    public boolean isOperating() {
+        return operating.get();
+    }
+
+    public BooleanProperty operatingProperty() {
+        return operating;
+    }
+
+    public void setOperating(boolean operating) {
+        this.operating.set(operating);
     }
 }
