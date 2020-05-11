@@ -66,9 +66,16 @@
     -fx-fill           : white;
 }
 
-.simple-control .operationButton {
+.simple-control .operationButtonOn {
+    -fx-background-image: url("icons/plugOn.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+}
+
+.simple-control .operationButtonOff {
     -fx-background-image: url("icons/plugOff.png");
     -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
 }
 
 .simple-control .display {
