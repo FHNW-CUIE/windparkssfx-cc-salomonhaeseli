@@ -269,12 +269,12 @@ public class SimpleControl extends Region {
         }));
 
         operatingProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue) {
-                operatingButton.getStyleClass().removeAll();
-                operatingButton.getStyleClass().addAll("operationButtonOn");
+            if (newValue) {
+                operatingButton.getStyleClass().clear();
+                operatingButton.getStyleClass().add("operationButtonOn");
             } else {
-                operatingButton.getStyleClass().removeAll();
-                operatingButton.getStyleClass().addAll("operationButtonOff");
+                operatingButton.getStyleClass().clear();
+                operatingButton.getStyleClass().add("operationButtonOff");
             }
         });
 
@@ -302,7 +302,6 @@ public class SimpleControl extends Region {
         resize();
     }
 
-    //ToDo: ueberpruefen ob dieser Resizing-Ansatz anwendbar ist.
     private void resize() {
         Insets padding = getPadding();
         double availableWidth = getWidth() - padding.getLeft() - padding.getRight();
