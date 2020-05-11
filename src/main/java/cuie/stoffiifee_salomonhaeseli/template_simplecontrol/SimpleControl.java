@@ -31,10 +31,12 @@ import javafx.scene.text.TextBoundsType;
 import javafx.util.Duration;
 
 /**
- * ToDo: CustomControl kurz beschreiben
- *
- * ToDo: Autoren ergänzen / ersetzen
- * @author
+ * Dieses Dashboard zeigt die produzierte Strommenge des selektierten Windrades in Relation zu der gesamt
+ * produzierten Strommgende an.
+ * Jeder Kreis kann die produzierte Strommenge für das entsprechende Jahr bearbeiten.
+ * Zentriert wird der in einem Button der Status des Windrads angezeigt (in Betrieb, ausser Betrieb) und kann über selbigen Button bearbeitet werden.
+ * @author Sophie-Marie Ordelman
+ * @author Salomon Häseli
  */
 //ToDo: Umbenennen.
 public class SimpleControl extends Region {
