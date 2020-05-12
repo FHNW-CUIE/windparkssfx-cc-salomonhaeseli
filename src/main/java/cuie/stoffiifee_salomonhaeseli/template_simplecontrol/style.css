@@ -72,6 +72,27 @@
     -fx-background-color: transparent;
 }
 
+.simple-control .label2015 {
+    -fx-text-weight: bolder;
+    -fx-text-fill: #CC3D86;
+}
+
+.simple-control .label2016 {
+    -fx-text-weight: bolder;
+    -fx-text-fill: #FDD200;
+}
+
+.simple-control .label2017 {
+    -fx-text-weight: bolder;
+    -fx-text-fill: #E86E01;
+}
+
+.simple-control .label2018 {
+    -fx-text-weight: bolder;
+    -fx-text-fill: #E02716;
+}
+
+
 .simple-control .operationButtonOff {
     -fx-background-image: url("icons/plugOff.png");
     -fx-background-repeat: no-repeat;

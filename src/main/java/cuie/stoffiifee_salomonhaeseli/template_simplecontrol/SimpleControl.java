@@ -20,8 +20,11 @@ import javafx.geometry.Point2D;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
@@ -75,6 +78,10 @@ public class SimpleControl extends Region {
     private Arc currentMwh2017Arc;
     private Arc currentMwh2018Arc;
     private Button operatingButton;
+    private Label label2015;
+    private Label label2016;
+    private Label label2017;
+    private Label label2018;
 
     // ToDo: ersetzen durch alle notwendigen Properties der CustomControl
     private final DoubleProperty currentMwh2015 = new SimpleDoubleProperty();
@@ -154,16 +161,29 @@ public class SimpleControl extends Region {
         currentMwh2018Arc = new Arc(centerX, centerY, radius2018, radius2018, +90, 180);
         currentMwh2018Arc.getStyleClass().add("currentMwh2018Arc");
 
-        thumb2015 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2015 = new Circle(centerX, centerY, 13);
         thumb2015.getStyleClass().add("thumb2015");
-        thumb2016 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2016 = new Circle(centerX, centerY, 13);
         thumb2016.getStyleClass().add("thumb2016");
-        thumb2017 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2017 = new Circle(centerX, centerY, 13);
         thumb2017.getStyleClass().add("thumb2017");
-        thumb2018 = new Circle(centerX, centerX + centerX - width, 13);
+        thumb2018 = new Circle(centerX, centerY, 13);
         thumb2018.getStyleClass().add("thumb2018");
 
         operatingButton = createCenteredButton(centerX, centerY, "");
+
+        label2015 = new Label("2015");
+        label2015.getStyleClass().add("label2015");
+
+        label2016 = new Label("2016");
+        label2016.getStyleClass().add("label2016");
+
+        label2017 = new Label("2017");
+        label2017.getStyleClass().add("label2017");
+
+        label2018 = new Label("2018");
+        label2018.getStyleClass().add("label2018");
+
     }
 
     private void initializeDrawingPane() {
@@ -180,9 +200,14 @@ public class SimpleControl extends Region {
 
     private void layoutParts() {
         //ToDo: alle Parts zur drawingPane hinzufügen
+        HBox hBox  = new HBox(10);
+        hBox.setLayoutX(ARTBOARD_WIDTH/2);
+        hBox.setLayoutY(ARTBOARD_HEIGHT);
+        hBox.getChildren().addAll(label2015,label2016,label2017,label2018);
+
         drawingPane.getChildren()
                 .addAll(maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc,
-                        currentMwh2018Arc, thumb2015, thumb2016, thumb2017, thumb2018, operatingButton);
+                        currentMwh2018Arc, thumb2015, thumb2016, thumb2017, thumb2018, operatingButton, hBox);
 
         getChildren().add(drawingPane);
     }
