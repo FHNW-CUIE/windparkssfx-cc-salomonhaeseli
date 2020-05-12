@@ -54,8 +54,8 @@ public class SimpleControl extends Region {
 
     private static final Locale CH = new Locale("de", "CH");
 
-    private static final double ARTBOARD_WIDTH = 800;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 800;  // ToDo: Anpassen an die Breite der Zeichnung
+    private static final double ARTBOARD_WIDTH = 400;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_HEIGHT = 400;  // ToDo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
@@ -497,8 +497,8 @@ public class SimpleControl extends Region {
         Button button = new Button();
         button.getStyleClass().add(styleClass);
         button.setTextAlignment(TextAlignment.CENTER);
-        button.setPrefWidth(67);
-        button.setPrefHeight(67);
+        button.setPrefWidth(40);
+        button.setPrefHeight(40);
         button.setLayoutY(cy - button.getPrefHeight() / 2);
         button.setLayoutX(cx - button.getPrefHeight() / 2);
 
