@@ -65,7 +65,6 @@ public class SimpleControl extends Region {
     private static final double MAXIMUM_WIDTH = 3000;    // ToDo: Anpassen
 
     // ToDo: diese Parts durch alle notwendigen Parts der gewünschten CustomControl ersetzen
-    private Circle backgroundCircle;
     private Circle thumb2015;
     private Circle thumb2016;
     private Circle thumb2017;
@@ -136,26 +135,23 @@ public class SimpleControl extends Region {
         double radius2017 = radius2016 - 40;
         double radius2018 = radius2017 - 40;
 
-        backgroundCircle = new Circle(centerX, centerX, centerX);
-        backgroundCircle.getStyleClass().add("background-circle");
-
-        maxMwhArc = new Arc(centerX, centerX, radius, radius, 0, 360.0);
+        maxMwhArc = new Arc(centerX, centerY, radius, radius, 0, 360.0);
         maxMwhArc.getStyleClass().add("maxMwhArc");
         maxMwhArc.setType(ArcType.CHORD);
 
-        currentMwh2015Arc = new Arc(centerX, centerX, radius2015, radius2015, +90, 180);
+        currentMwh2015Arc = new Arc(centerX, centerY, radius2015, radius2015, +90, 180);
         currentMwh2015Arc.getStyleClass().add("currentMwh2015Arc");
         currentMwh2015Arc.setType(ArcType.OPEN);
 
-        currentMwh2016Arc = new Arc(centerX, centerX, radius2016, radius2016, +90, 180);
+        currentMwh2016Arc = new Arc(centerX, centerY, radius2016, radius2016, +90, 180);
         currentMwh2016Arc.getStyleClass().add("currentMwh2016Arc");
         currentMwh2016Arc.setType(ArcType.OPEN);
 
-        currentMwh2017Arc = new Arc(centerX, centerX, radius2017, radius2017, +90, 180);
+        currentMwh2017Arc = new Arc(centerX, centerY, radius2017, radius2017, +90, 180);
         currentMwh2017Arc.getStyleClass().add("currentMwh2017Arc");
         currentMwh2017Arc.setType(ArcType.OPEN);
 
-        currentMwh2018Arc = new Arc(centerX, centerX, radius2018, radius2018, +90, 180);
+        currentMwh2018Arc = new Arc(centerX, centerY, radius2018, radius2018, +90, 180);
         currentMwh2018Arc.getStyleClass().add("currentMwh2018Arc");
 
         thumb2015 = new Circle(centerX, centerX + centerX - width, 13);
@@ -185,7 +181,7 @@ public class SimpleControl extends Region {
     private void layoutParts() {
         //ToDo: alle Parts zur drawingPane hinzufügen
         drawingPane.getChildren()
-                .addAll(backgroundCircle, maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc,
+                .addAll(maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc,
                         currentMwh2018Arc, thumb2015, thumb2016, thumb2017, thumb2018, operatingButton);
 
         getChildren().add(drawingPane);
