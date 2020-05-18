@@ -72,7 +72,7 @@ public class DemoPane extends BorderPane {
         cc.currentMwh2016Property().bindBidirectional(pm.currentMwh2016Property());
         cc.currentMwh2017Property().bindBidirectional(pm.currentMwh2017Property());
         cc.currentMwh2018Property().bindBidirectional(pm.currentMwh2018Property());
-        cc.operatingProperty().bindBidirectional(pm.operatingProperty());
+        cc.statusProperty().bindBidirectional(pm.statusProperty());
     }
 
 }

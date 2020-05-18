@@ -9,7 +9,7 @@ public class PresentationModel {
     private final DoubleProperty currentMwh2017 =   new SimpleDoubleProperty(1);
     private final DoubleProperty currentMwh2018 =   new SimpleDoubleProperty(10000);
     private final DoubleProperty maxMwh         =   new SimpleDoubleProperty(300000);
-    private final BooleanProperty operating     =   new SimpleBooleanProperty(false);
+    private final StringProperty status         =   new SimpleStringProperty("geplant");
 
     // all getters and setters (generated via "Code -> Generate -> Getter and Setter)
 
@@ -85,15 +85,15 @@ public class PresentationModel {
         this.currentMwh2018.set(currentMwh2018);
     }
 
-    public boolean getOperating() {
-        return operating.get();
+    public String getStatus() {
+        return status.get();
     }
 
-    public BooleanProperty operatingProperty() {
-        return operating;
+    public StringProperty statusProperty() {
+        return status;
     }
 
-    public void setOperating(boolean operating) {
-        this.operating.set(operating);
+    public void setStatus(String status) {
+        this.status.set(status);
     }
 }

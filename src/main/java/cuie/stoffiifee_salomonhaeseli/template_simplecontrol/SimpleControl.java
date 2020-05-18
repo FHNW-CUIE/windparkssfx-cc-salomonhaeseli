@@ -3,13 +3,7 @@ package cuie.stoffiifee_salomonhaeseli.template_simplecontrol;
 import java.util.List;
 import java.util.Locale;
 
-import javafx.animation.AnimationTimer;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.css.CssMetaData;
 import javafx.css.SimpleStyleableObjectProperty;
 import javafx.css.Styleable;
@@ -17,24 +11,19 @@ import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleablePropertyFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextBoundsType;
-import javafx.util.Duration;
 
 /**
  * Dieses Dashboard zeigt die produzierte Strommenge des selektierten Windrades in Relation zu der gesamt
@@ -89,7 +78,7 @@ public class SimpleControl extends Region {
     private final DoubleProperty currentMwh2017 = new SimpleDoubleProperty();
     private final DoubleProperty currentMwh2018 = new SimpleDoubleProperty();
     private final DoubleProperty maxMwh = new SimpleDoubleProperty();
-    private final BooleanProperty operating = new SimpleBooleanProperty();
+    private final StringProperty status = new SimpleStringProperty();
 
     // ToDo: ergänzen mit allen CSS stylable properties
     private static final CssMetaData<SimpleControl, Color> BASE_COLOR_META_DATA = FACTORY
@@ -239,10 +228,17 @@ public class SimpleControl extends Region {
         });
 
         operatingButton.setOnMouseClicked(event -> {
-            if (isOperating()) {
-                setOperating(false);
-            } else {
-                setOperating(true);
+            if (getStatus().equals("in Betrieb")) {
+                setStatus("geplant");
+            }
+            else if (getStatus().equals("geplant")) {
+                setStatus("in Bau");
+            }
+            else if (getStatus().equals("in Bau")) {
+                setStatus("in Betrieb");
+            }
+            else {
+
             }
         });
     }
@@ -324,13 +320,18 @@ public class SimpleControl extends Region {
             thumb2018.setCenterY(p.getY());
         }));
 
-        operatingProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
+        statusProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("geplant")) {
                 operatingButton.getStyleClass().clear();
-                operatingButton.getStyleClass().add("operationButtonOn");
-            } else {
+                operatingButton.getStyleClass().add("geplant");
+            }
+            if (newValue.equals("in Bau")) {
                 operatingButton.getStyleClass().clear();
-                operatingButton.getStyleClass().add("operationButtonOff");
+                operatingButton.getStyleClass().add("inBau");
+            }
+            if (newValue.equals("in Betrieb")) {
+                operatingButton.getStyleClass().clear();
+                operatingButton.getStyleClass().add("inBetrieb");
             }
         });
 
@@ -707,15 +708,15 @@ public class SimpleControl extends Region {
         this.currentMwh2018.set(currentMwh2018);
     }
 
-    public boolean isOperating() {
-        return operating.get();
+    public String getStatus() {
+        return status.get();
     }
 
-    public BooleanProperty operatingProperty() {
-        return operating;
+    public StringProperty statusProperty() {
+        return status;
     }
 
-    public void setOperating(boolean operating) {
-        this.operating.set(operating);
+    public void setStatus(String status) {
+        this.status.set(status);
     }
 }

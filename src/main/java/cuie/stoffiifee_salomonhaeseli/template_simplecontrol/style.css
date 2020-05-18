@@ -66,8 +66,20 @@
     -fx-fill           : white;
 }
 
-.simple-control .operationButtonOn {
-    -fx-background-image: url("icons/plugOn.png");
+.simple-control .geplant {
+    -fx-background-image: url("icons/geplant.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+}
+
+.simple-control .inBau {
+    -fx-background-image: url("icons/inBau.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+}
+
+.simple-control .inBetrieb {
+    -fx-background-image: url("icons/inBetrieb.png");
     -fx-background-repeat: no-repeat;
     -fx-background-color: transparent;
 }
@@ -90,13 +102,6 @@
 .simple-control .label2018 {
     -fx-text-weight: bolder;
     -fx-text-fill: #E02716;
-}
-
-
-.simple-control .operationButtonOff {
-    -fx-background-image: url("icons/plugOff.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-color: transparent;
 }
 
 .simple-control .display {
