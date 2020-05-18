@@ -249,6 +249,41 @@ public class SimpleControl extends Region {
 
     private void setupValueChangeListeners() {
         //ToDo: durch die Listener auf die Properties des Custom Controls ersetzen
+        maxMwhProperty().addListener((observable, oldValue, newValue) -> {
+
+            double arcSize2015 = valueToAngle(getCurrentMwh2015(), 0, getMaxMwh());
+            currentMwh2015Arc.setLength(-arcSize2015);
+
+            double arcSize2016 = valueToAngle(getCurrentMwh2016(), 0, getMaxMwh());
+            currentMwh2015Arc.setLength(-arcSize2016);
+
+            double arcSize2017 = valueToAngle(getCurrentMwh2017(), 0, getMaxMwh());
+            currentMwh2015Arc.setLength(-arcSize2017);
+
+            double arcSize2018 = valueToAngle(getCurrentMwh2018(), 0, getMaxMwh());
+            currentMwh2015Arc.setLength(-arcSize2018);
+
+            Point2D p2015 = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+                    arcSize2015);
+            thumb2015.setCenterX(p2015.getX());
+            thumb2015.setCenterY(p2015.getY());
+
+            Point2D p2016 = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+                    arcSize2016);
+            thumb2016.setCenterX(p2016.getX());
+            thumb2016.setCenterY(p2016.getY());
+
+            Point2D p2017 = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+                    arcSize2017);
+            thumb2017.setCenterX(p2017.getX());
+            thumb2017.setCenterY(p2017.getY());
+
+            Point2D p2018 = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+                    arcSize2018);
+            thumb2018.setCenterX(p2018.getX());
+            thumb2018.setCenterY(p2018.getY());
+        });
+
         currentMwh2015Property().addListener(((observable, oldValue, newValue) -> {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2015Arc.setLength(-arcSize);
