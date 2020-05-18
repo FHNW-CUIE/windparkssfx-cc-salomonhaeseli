@@ -237,9 +237,6 @@ public class SimpleControl extends Region {
             else if (getStatus().equals("in Bau")) {
                 setStatus("in Betrieb");
             }
-            else {
-
-            }
         });
     }
 
