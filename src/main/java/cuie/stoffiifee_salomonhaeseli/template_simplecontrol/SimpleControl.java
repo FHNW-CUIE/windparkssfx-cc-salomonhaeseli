@@ -228,14 +228,15 @@ public class SimpleControl extends Region {
         });
 
         operatingButton.setOnMouseClicked(event -> {
-            if (getStatus().equals("in Betrieb")) {
-                setStatus("geplant");
-            }
-            else if (getStatus().equals("geplant")) {
-                setStatus("in Bau");
-            }
-            else if (getStatus().equals("in Bau")) {
-                setStatus("in Betrieb");
+            switch(getStatus()){
+                case "in Betrieb":
+                    setStatus("geplant");
+                    break;
+                case "geplant":
+                    setStatus("in Bau");
+                    break;
+                case "in Bau":
+                    setStatus("in Betrieb");
             }
         });
     }
