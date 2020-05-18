@@ -71,6 +71,7 @@ public class SimpleControl extends Region {
     private Label label2016;
     private Label label2017;
     private Label label2018;
+    private Label maxMwhLabel;
 
     // ToDo: ersetzen durch alle notwendigen Properties der CustomControl
     private final DoubleProperty currentMwh2015 = new SimpleDoubleProperty();
@@ -173,6 +174,9 @@ public class SimpleControl extends Region {
         label2018 = new Label("2018");
         label2018.getStyleClass().add("label2018");
 
+        maxMwhLabel = new Label("Max MWH");
+        maxMwhLabel.getStyleClass().add("maxMwhLabel");
+
     }
 
     private void initializeDrawingPane() {
@@ -192,7 +196,7 @@ public class SimpleControl extends Region {
         HBox hBox  = new HBox(10);
         hBox.setLayoutX(ARTBOARD_WIDTH/2);
         hBox.setLayoutY(ARTBOARD_HEIGHT);
-        hBox.getChildren().addAll(label2015,label2016,label2017,label2018);
+        hBox.getChildren().addAll(maxMwhLabel,label2015,label2016,label2017,label2018);
 
         drawingPane.getChildren()
                 .addAll(maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc,

@@ -104,6 +104,11 @@
     -fx-text-fill: #E02716;
 }
 
+.simple-control .maxMwhLabel {
+    -fx-text-weight: bolder;
+    -fx-text-fill: #6BD098;
+}
+
 .simple-control .display {
     -fx-font-family: 'Lato Light';
     -fx-font-size: 24;
