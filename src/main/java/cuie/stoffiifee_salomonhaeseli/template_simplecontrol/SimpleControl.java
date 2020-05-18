@@ -46,8 +46,8 @@ public class SimpleControl extends Region {
 
     private static final Locale CH = new Locale("de", "CH");
 
-    private static final double ARTBOARD_WIDTH = 400;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 400;  // ToDo: Anpassen an die Breite der Zeichnung
+    private static final double ARTBOARD_WIDTH = 200;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_HEIGHT = 200;  // ToDo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
@@ -127,10 +127,10 @@ public class SimpleControl extends Region {
         double centerY = ARTBOARD_HEIGHT * 0.5;
         int width = 15;
         double radius = centerX - width;
-        double radius2015 = ((centerX - width) - 40);
-        double radius2016 = radius2015 - 40;
-        double radius2017 = radius2016 - 40;
-        double radius2018 = radius2017 - 40;
+        double radius2015 = radius - 20;
+        double radius2016 = radius2015 - 20;
+        double radius2017 = radius2016 - 20;
+        double radius2018 = radius2017 - 20;
 
         maxMwhArc = new Arc(centerX, centerY, radius, radius, 0, 360.0);
         maxMwhArc.getStyleClass().add("maxMwhArc");
@@ -151,13 +151,13 @@ public class SimpleControl extends Region {
         currentMwh2018Arc = new Arc(centerX, centerY, radius2018, radius2018, +90, 180);
         currentMwh2018Arc.getStyleClass().add("currentMwh2018Arc");
 
-        thumb2015 = new Circle(centerX, centerY, 13);
+        thumb2015 = new Circle(centerX, centerY, 6);
         thumb2015.getStyleClass().add("thumb2015");
-        thumb2016 = new Circle(centerX, centerY, 13);
+        thumb2016 = new Circle(centerX, centerY, 6);
         thumb2016.getStyleClass().add("thumb2016");
-        thumb2017 = new Circle(centerX, centerY, 13);
+        thumb2017 = new Circle(centerX, centerY, 6);
         thumb2017.getStyleClass().add("thumb2017");
-        thumb2018 = new Circle(centerX, centerY, 13);
+        thumb2018 = new Circle(centerX, centerY, 6);
         thumb2018.getStyleClass().add("thumb2018");
 
         operatingButton = createCenteredButton(centerX, centerY, "");
@@ -194,7 +194,7 @@ public class SimpleControl extends Region {
     private void layoutParts() {
         //ToDo: alle Parts zur drawingPane hinzufügen
         HBox hBox  = new HBox(10);
-        hBox.setLayoutX(ARTBOARD_WIDTH/2);
+        hBox.setLayoutX(0);
         hBox.setLayoutY(ARTBOARD_HEIGHT);
         hBox.getChildren().addAll(maxMwhLabel,label2015,label2016,label2017,label2018);
 

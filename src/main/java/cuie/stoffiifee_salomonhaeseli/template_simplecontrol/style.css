@@ -10,6 +10,7 @@
 .simple-control .maxMwhArc {
     -fx-stroke-width   : 30;
     -fx-stroke         : #6BD098;
+    -fx-stroke-width: 15;
     -fx-stroke-line-cap: round;
     -fx-fill           : transparent;
 }
@@ -17,6 +18,7 @@
 .simple-control .currentMwh2015Arc {
     -fx-stroke-width   : 30;
     -fx-stroke         : #CC3D86;
+    -fx-stroke-width: 15;
     -fx-stroke-line-cap: round;
     -fx-fill           : transparent;
 }
@@ -24,6 +26,7 @@
 .simple-control .currentMwh2016Arc {
     -fx-stroke-width   : 30;
     -fx-stroke         : #FDD200;
+    -fx-stroke-width: 15;
     -fx-stroke-line-cap: round;
     -fx-fill           : transparent;
 }
@@ -31,6 +34,7 @@
 .simple-control .currentMwh2017Arc {
     -fx-stroke-width   : 30;
     -fx-stroke         : #E86E01;
+    -fx-stroke-width: 15;
     -fx-stroke-line-cap: round;
     -fx-fill           : transparent;
 }
@@ -38,32 +42,37 @@
 .simple-control .currentMwh2018Arc {
     -fx-stroke-width   : 30;
     -fx-stroke         : #E02716;
+    -fx-stroke-width: 15;
     -fx-stroke-line-cap: round;
     -fx-fill           : transparent;
 }
 
 .simple-control .thumb2015 {
-    -fx-stroke         : #CC3D86;
+    -fx-stroke         : white;
+    -fx-stroke-width: 15;
     -fx-stroke-width   : 2;
-    -fx-fill           : white;
+    -fx-fill           : #CC3D86;
 }
 
 .simple-control .thumb2016 {
-    -fx-stroke         : #FDD200;
+    -fx-stroke         : white;
+    -fx-stroke-width: 15;
     -fx-stroke-width   : 2;
-    -fx-fill           : white;
+    -fx-fill           : #FDD200;
 }
 
 .simple-control .thumb2017 {
-    -fx-stroke         : #E86E01;
+    -fx-stroke         : white;
+    -fx-stroke-width: 15;
     -fx-stroke-width   : 2;
-    -fx-fill           : white;
+    -fx-fill           : #E86E01;
 }
 
 .simple-control .thumb2018 {
-    -fx-stroke         : #E02716;
+    -fx-stroke         : white;
+    -fx-stroke-width: 15;
     -fx-stroke-width   : 2;
-    -fx-fill           : white;
+    -fx-fill           : #E02716;
 }
 
 .simple-control .geplant {
