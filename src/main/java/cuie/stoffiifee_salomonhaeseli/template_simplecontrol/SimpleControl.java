@@ -556,8 +556,8 @@ public class SimpleControl extends Region {
         Button button = new Button();
         button.getStyleClass().add(styleClass);
         button.setTextAlignment(TextAlignment.CENTER);
-        button.setPrefWidth(40);
-        button.setPrefHeight(40);
+        button.setPrefWidth(20);
+        button.setPrefHeight(20);
         button.setLayoutY(cy - button.getPrefHeight() / 2);
         button.setLayoutX(cx - button.getPrefHeight() / 2);
 
