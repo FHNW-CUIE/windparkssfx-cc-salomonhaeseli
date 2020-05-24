@@ -4,10 +4,10 @@ import javafx.beans.property.*;
 
 public class PresentationModel {
     private final StringProperty demoTitle      =   new SimpleStringProperty("Spinning Control Demo");
-    private final DoubleProperty currentMwh2015 =   new SimpleDoubleProperty(1);
-    private final DoubleProperty currentMwh2016 =   new SimpleDoubleProperty(1);
-    private final DoubleProperty currentMwh2017 =   new SimpleDoubleProperty(1);
-    private final DoubleProperty currentMwh2018 =   new SimpleDoubleProperty(10000);
+    private final DoubleProperty currentMwh2015 =   new SimpleDoubleProperty(0);
+    private final DoubleProperty currentMwh2016 =   new SimpleDoubleProperty(0);
+    private final DoubleProperty currentMwh2017 =   new SimpleDoubleProperty(0);
+    private final DoubleProperty currentMwh2018 =   new SimpleDoubleProperty(0);
     private final DoubleProperty maxMwh         =   new SimpleDoubleProperty(300000);
     private final StringProperty status         =   new SimpleStringProperty("in Betrieb");
 

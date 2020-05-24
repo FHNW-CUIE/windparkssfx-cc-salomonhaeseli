@@ -46,8 +46,8 @@ public class SimpleControl extends Region {
 
     private static final Locale CH = new Locale("de", "CH");
 
-    private static final double ARTBOARD_WIDTH = 200;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 200;  // ToDo: Anpassen an die Breite der Zeichnung
+    private static final double ARTBOARD_WIDTH = 230;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_HEIGHT = 230;  // ToDo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
