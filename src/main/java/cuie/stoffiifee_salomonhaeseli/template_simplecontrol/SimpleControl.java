@@ -265,7 +265,7 @@ public class SimpleControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2015Arc.setLength(-arcSize);
 
-            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 35,
                     arcSize);
             thumb2015.setCenterX(p.getX());
             thumb2015.setCenterY(p.getY());
@@ -275,7 +275,7 @@ public class SimpleControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2016Arc.setLength(-arcSize);
 
-            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 55,
                     arcSize);
             thumb2016.setCenterX(p.getX());
             thumb2016.setCenterY(p.getY());
@@ -285,7 +285,7 @@ public class SimpleControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2017Arc.setLength(-arcSize);
 
-            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 75,
                     arcSize);
             thumb2017.setCenterX(p.getX());
             thumb2017.setCenterY(p.getY());
@@ -295,7 +295,7 @@ public class SimpleControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2018Arc.setLength(-arcSize);
 
-            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
+            Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 95,
                     arcSize);
             thumb2018.setCenterX(p.getX());
             thumb2018.setCenterY(p.getY());
