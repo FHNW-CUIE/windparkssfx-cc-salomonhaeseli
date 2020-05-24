@@ -248,18 +248,17 @@ public class SimpleControl extends Region {
     private void setupValueChangeListeners() {
         //ToDo: durch die Listener auf die Properties des Custom Controls ersetzen
         maxMwhProperty().addListener((observable, oldValue, newValue) -> {
-
             double arcSize2015 = valueToAngle(getCurrentMwh2015(), 0, getMaxMwh());
             currentMwh2015Arc.setLength(-arcSize2015);
 
             double arcSize2016 = valueToAngle(getCurrentMwh2016(), 0, getMaxMwh());
-            currentMwh2015Arc.setLength(-arcSize2016);
+            currentMwh2016Arc.setLength(-arcSize2016);
 
             double arcSize2017 = valueToAngle(getCurrentMwh2017(), 0, getMaxMwh());
-            currentMwh2015Arc.setLength(-arcSize2017);
+            currentMwh2017Arc.setLength(-arcSize2017);
 
             double arcSize2018 = valueToAngle(getCurrentMwh2018(), 0, getMaxMwh());
-            currentMwh2015Arc.setLength(-arcSize2018);
+            currentMwh2018Arc.setLength(-arcSize2018);
 
             Point2D p2015 = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 16,
                     arcSize2015);
