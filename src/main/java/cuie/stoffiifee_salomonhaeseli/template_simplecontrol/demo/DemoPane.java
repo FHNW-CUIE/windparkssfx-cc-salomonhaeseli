@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import cuie.stoffiifee_salomonhaeseli.template_simplecontrol.SimpleControl;
+import cuie.stoffiifee_salomonhaeseli.template_simplecontrol.SpinningControl;
 import javafx.util.converter.NumberStringConverter;
 
 public class DemoPane extends BorderPane {
@@ -14,7 +14,7 @@ public class DemoPane extends BorderPane {
     private final PresentationModel pm;
 
     // declare the custom control
-    private SimpleControl cc;
+    private SpinningControl cc;
 
     // all controls
     private TextField maxMwh;
@@ -34,7 +34,7 @@ public class DemoPane extends BorderPane {
     private void initializeControls() {
         setPadding(new Insets(10));
 
-        cc = new SimpleControl();
+        cc = new SpinningControl();
         maxMwh = new TextField();
         currentMwh2015 = new TextField();
         currentMwh2016 = new TextField();

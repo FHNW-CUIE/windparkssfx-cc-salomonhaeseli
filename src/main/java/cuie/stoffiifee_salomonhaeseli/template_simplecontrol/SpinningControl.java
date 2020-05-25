@@ -35,9 +35,9 @@ import javafx.scene.text.TextAlignment;
  * @author Salomon Häseli
  */
 //ToDo: Umbenennen.
-public class SimpleControl extends Region {
+public class SpinningControl extends Region {
     // wird gebraucht fuer StyleableProperties
-    private static final StyleablePropertyFactory<SimpleControl> FACTORY = new StyleablePropertyFactory<>(
+    private static final StyleablePropertyFactory<SpinningControl> FACTORY = new StyleablePropertyFactory<>(
             Region.getClassCssMetaData());
 
     @Override public List<CssMetaData<? extends Styleable, ?>> getCssMetaData() {
@@ -46,8 +46,8 @@ public class SimpleControl extends Region {
 
     private static final Locale CH = new Locale("de", "CH");
 
-    private static final double ARTBOARD_WIDTH = 230;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 230;  // ToDo: Anpassen an die Breite der Zeichnung
+    private static final double ARTBOARD_WIDTH = 250;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_HEIGHT = 250;  // ToDo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
@@ -82,7 +82,7 @@ public class SimpleControl extends Region {
     private final StringProperty status = new SimpleStringProperty();
 
     // ToDo: ergänzen mit allen CSS stylable properties
-    private static final CssMetaData<SimpleControl, Color> BASE_COLOR_META_DATA = FACTORY
+    private static final CssMetaData<SpinningControl, Color> BASE_COLOR_META_DATA = FACTORY
             .createColorCssMetaData("-base-color", s -> s.baseColor);
 
     private final StyleableObjectProperty<Color> baseColor = new SimpleStyleableObjectProperty<Color>(
@@ -102,7 +102,7 @@ public class SimpleControl extends Region {
     // fuer Resizing benoetigt
     private Pane drawingPane;
 
-    public SimpleControl() {
+    public SpinningControl() {
         initializeSelf();
         initializeParts();
         initializeDrawingPane();
