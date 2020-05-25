@@ -22,6 +22,7 @@ public class DemoPane extends BorderPane {
     private TextField currentMwh2016;
     private TextField currentMwh2017;
     private TextField currentMwh2018;
+    private TextField status;
 
     public DemoPane(PresentationModel pm) {
         this.pm = pm;
@@ -39,6 +40,7 @@ public class DemoPane extends BorderPane {
         currentMwh2016 = new TextField();
         currentMwh2017 = new TextField();
         currentMwh2018 = new TextField();
+        status         = new TextField();
     }
 
     private void layoutControls() {
@@ -63,6 +65,8 @@ public class DemoPane extends BorderPane {
         currentMwh2016.textProperty().bindBidirectional(pm.currentMwh2016Property(), new NumberStringConverter());
         currentMwh2017.textProperty().bindBidirectional(pm.currentMwh2017Property(), new NumberStringConverter());
         currentMwh2018.textProperty().bindBidirectional(pm.currentMwh2018Property(), new NumberStringConverter());
+        status.textProperty().bindBidirectional(pm.statusProperty());
+
 
 
 
