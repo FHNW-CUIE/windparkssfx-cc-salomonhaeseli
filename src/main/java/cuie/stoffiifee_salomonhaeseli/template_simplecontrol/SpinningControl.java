@@ -1,5 +1,6 @@
 package cuie.stoffiifee_salomonhaeseli.template_simplecontrol;
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,6 +25,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.util.converter.NumberStringConverter;
 
 /**
  * Dieses Dashboard zeigt die produzierte Strommenge des selektierten Windrades in Relation zu der gesamt
@@ -46,9 +48,8 @@ public class SpinningControl extends Region {
 
     private static final Locale CH = new Locale("de", "CH");
 
-    private static final double ARTBOARD_WIDTH = 250;  // ToDo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 250;  // ToDo: Anpassen an die Breite der Zeichnung
-
+    private static final double ARTBOARD_WIDTH = 250;
+    private static final double ARTBOARD_HEIGHT = 250;
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
     private static final double MINIMUM_WIDTH = 200;    // ToDo: Anpassen
@@ -72,6 +73,8 @@ public class SpinningControl extends Region {
     private Label label2017;
     private Label label2018;
     private Label maxMwhLabel;
+    private Label maxMwhValue;
+
 
     // ToDo: ersetzen durch alle notwendigen Properties der CustomControl
     private final DoubleProperty currentMwh2015 = new SimpleDoubleProperty();
@@ -174,8 +177,15 @@ public class SpinningControl extends Region {
         label2018 = new Label("2018");
         label2018.getStyleClass().add("label2018");
 
-        maxMwhLabel = new Label("Max MWH");
+        maxMwhLabel = new Label("Max Mwh: ");
         maxMwhLabel.getStyleClass().add("maxMwhLabel");
+
+
+        maxMwhValue = new Label();
+        maxMwhValue.textProperty().bindBidirectional(maxMwhProperty(), new NumberStringConverter());
+
+
+
 
     }
 
@@ -196,7 +206,7 @@ public class SpinningControl extends Region {
         HBox hBox  = new HBox(10);
         hBox.setLayoutX(0);
         hBox.setLayoutY(ARTBOARD_HEIGHT);
-        hBox.getChildren().addAll(maxMwhLabel,label2015,label2016,label2017,label2018);
+        hBox.getChildren().addAll(maxMwhLabel, maxMwhValue, label2015,label2016,label2017,label2018);
 
         drawingPane.getChildren()
                 .addAll(maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc,
@@ -320,20 +330,9 @@ public class SpinningControl extends Region {
 
     private void setupBindings() {
         //ToDo: dieses Binding ersetzen
-    }
-
-    private void updateUI() {
-        //ToDo : ergaenzen mit dem was bei einer Wertaenderung einer Status-Property im UI upgedated werden muss
-    }
-
-    private void performPeriodicTask() {
-        //ToDo: ergaenzen mit dem was bei der getakteten Animation gemacht werden muss
-        //normalerweise: den Wert einer der Status-Properties aendern
-    }
-
-    private void startClockedAnimation(boolean start) {
 
     }
+
 
     @Override protected void layoutChildren() {
         super.layoutChildren();
@@ -362,24 +361,9 @@ public class SpinningControl extends Region {
         drawingPane.relocate((getWidth() - ARTBOARD_WIDTH) * 0.5, (getHeight() - ARTBOARD_HEIGHT) * 0.5);
     }
 
-    private void relocateDrawingPaneCenterBottom(double scaleY, double paddingBottom) {
-        double visualHeight = ARTBOARD_HEIGHT * scaleY;
-        double visualSpace = getHeight() - visualHeight;
-        double y = visualSpace + (visualHeight - ARTBOARD_HEIGHT) * 0.5 - paddingBottom;
-
-        drawingPane.relocate((getWidth() - ARTBOARD_WIDTH) * 0.5, y);
-    }
-
-    private void relocateDrawingPaneCenterTop(double scaleY, double paddingTop) {
-        double visualHeight = ARTBOARD_HEIGHT * scaleY;
-        double y = (visualHeight - ARTBOARD_HEIGHT) * 0.5 + paddingTop;
-
-        drawingPane.relocate((getWidth() - ARTBOARD_WIDTH) * 0.5, y);
-    }
 
     // Sammlung nuetzlicher Funktionen
 
-    //ToDo: diese Funktionen anschauen und für die Umsetzung des CustomControls benutzen
 
     private void loadFonts(String... font) {
         for (String f : font) {
@@ -512,17 +496,6 @@ public class SpinningControl extends Region {
     }
 
     /**
-     * Erzeugt eine Text-Instanz in der Mitte des CustomControls.
-     * Der Text bleibt zentriert auch wenn der angezeigte Text sich aendert.
-     *
-     * @param styleClass mit dieser StyleClass kann der erzeugte Text via css gestyled werden
-     * @return Text
-     */
-    private Button createCenteredButton(String styleClass) {
-        return createCenteredButton(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, styleClass);
-    }
-
-    /**
      * Erzeugt eine Text-Instanz mit dem angegebenen Zentrum.
      * Der Text bleibt zentriert auch wenn der angezeigte Text sich aendert.
      *
@@ -541,43 +514,6 @@ public class SpinningControl extends Region {
         button.setLayoutX(cx - button.getPrefHeight() / 2);
 
         return button;
-    }
-
-    /**
-     * Erzeugt eine Group von Lines, die zum Beispiel fuer Skalen oder Zifferblaetter verwendet werden koennen.
-     * <p>
-     * Diese Funktion ist sinnvoll nur fuer radiale Controls einsetzbar.
-     *
-     * @param cx            x-Position des Zentrumspunkts
-     * @param cy            y-Position des Zentrumspunkts
-     * @param radius        radius auf dem die Anfangspunkte der Ticks liegen
-     * @param numberOfTicks gewuenschte Anzahl von Ticks
-     * @param startingAngle Wickel in dem der erste Tick liegt, zwischen 0 und 360 Grad
-     * @param overallAngle  gewuenschter Winkel zwischen den erzeugten Ticks, zwischen 0 und 360 Grad
-     * @param tickLength    Laenge eines Ticks
-     * @param styleClass    Name der StyleClass mit der ein einzelner Tick via css gestyled werden kann
-     * @return Group mit allen Ticks
-     */
-    private Group createTicks(double cx, double cy, double radius, int numberOfTicks, double startingAngle,
-            double overallAngle, double tickLength, String styleClass) {
-        Group group = new Group();
-
-        double degreesBetweenTicks =
-                overallAngle == 360 ? overallAngle / numberOfTicks : overallAngle / (numberOfTicks - 1);
-        double innerRadius = radius - tickLength;
-
-        for (int i = 0; i < numberOfTicks; i++) {
-            double angle = startingAngle + i * degreesBetweenTicks;
-
-            Point2D startPoint = pointOnCircle(cx, cy, radius, angle);
-            Point2D endPoint = pointOnCircle(cx, cy, innerRadius, angle);
-
-            Line tick = new Line(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY());
-            tick.getStyleClass().add(styleClass);
-            group.getChildren().add(tick);
-        }
-
-        return group;
     }
 
     private String colorToCss(final Color color) {
@@ -613,6 +549,12 @@ public class SpinningControl extends Region {
 
         return ARTBOARD_HEIGHT + verticalPadding;
     }
+
+
+
+
+
+
 
     // alle getter und setter  (generiert via "Code -> Generate... -> Getter and Setter)
 
@@ -700,4 +642,8 @@ public class SpinningControl extends Region {
     public void setStatus(String status) {
         this.status.set(status);
     }
+
+    public Label getMaxMwhValue() { return maxMwhValue; }
+
+    public void setMaxMwhValue(Label maxMwhValue) { this.maxMwhValue = maxMwhValue; }
 }
