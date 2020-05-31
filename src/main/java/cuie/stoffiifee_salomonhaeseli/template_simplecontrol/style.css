@@ -76,6 +76,7 @@
     -fx-background-image: url("icons/inBau.png");
     -fx-background-repeat: no-repeat;
     -fx-background-color: transparent;
+
 }
 
 .simple-control .inBetrieb {
@@ -114,4 +115,3 @@
     -fx-font-size: 24;
     -fx-fill: derive(-base-color, 95%);
 }
-
