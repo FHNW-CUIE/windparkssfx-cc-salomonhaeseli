@@ -137,7 +137,7 @@ public class SpinningControl extends Region {
         double radius2017 = radius2016 - 20;
         double radius2018 = radius2017 - 20;
 
-        maxMwhArc = new Arc(centerX, centerY, radius, radius, 0, 0);
+        maxMwhArc = new Arc(centerX, centerY, radius, radius, +90, 0);
         maxMwhArc.getStyleClass().add("maxMwhArc");
         maxMwhArc.setType(ArcType.OPEN);
 
