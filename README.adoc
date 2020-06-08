@@ -5,6 +5,8 @@
 * Sophie-Marie Ordelman
 * Salomon Häseli
 
+Link zu Implementationshilfe: https://docs.google.com/document/d/19v2BNV63JT0GxNeXNWUSkxGXE9CN0q0TP9wstz3knZQ/edit?usp=sharing
+
 === Integriert in die OOP2-Projekte von
 
 * *_Ergänzen Sie hier welche OOP2-Teams Ihr Projekt erfolgreich integriert haben._*
