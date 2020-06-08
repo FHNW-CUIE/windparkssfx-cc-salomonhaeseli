@@ -279,8 +279,8 @@ public class SpinningControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2015Arc.setLength(-arcSize);
 
-            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
-            maxMwhArc.setLength(-maxMwharcSize);
+            updateMaxMwhArc();
+
 
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 35,
                     arcSize);
@@ -292,8 +292,7 @@ public class SpinningControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2016Arc.setLength(-arcSize);
 
-            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
-            maxMwhArc.setLength(-maxMwharcSize);
+            updateMaxMwhArc();
 
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 55,
                     arcSize);
@@ -305,8 +304,8 @@ public class SpinningControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2017Arc.setLength(-arcSize);
 
-            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
-            maxMwhArc.setLength(-maxMwharcSize);
+            updateMaxMwhArc();
+
 
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 75,
                     arcSize);
@@ -318,8 +317,8 @@ public class SpinningControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2018Arc.setLength(-arcSize);
 
-            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
-            maxMwhArc.setLength(-maxMwharcSize);
+            updateMaxMwhArc();
+
 
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 95,
                     arcSize);
@@ -393,6 +392,12 @@ public class SpinningControl extends Region {
             getStylesheets().add(stylesheet);
         }
     }
+
+
+    private void updateMaxMwhArc(){
+        maxMwhArc.setLength(-(valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh())));
+    }
+
 
     /**
      * Umrechnen einer Prozentangabe, zwischen 0 und 100, in den tatsaechlichen Wert innerhalb des angegebenen Wertebereichs.
