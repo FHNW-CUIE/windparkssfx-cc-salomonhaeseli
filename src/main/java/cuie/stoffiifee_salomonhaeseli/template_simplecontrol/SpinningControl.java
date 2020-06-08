@@ -182,9 +182,8 @@ public class SpinningControl extends Region {
         label2018 = new Label("2018");
         label2018.getStyleClass().add("label2018");
 
-        maxMwhLabel = new Label("Max Mwh: ");
+        maxMwhLabel = new Label("All MwH: ");
         maxMwhLabel.getStyleClass().add("maxMwhLabel");
-
 
         maxMwhValue = new Label();
         maxMwhValue.textProperty().bindBidirectional(maxMwhProperty(), new NumberStringConverter());
