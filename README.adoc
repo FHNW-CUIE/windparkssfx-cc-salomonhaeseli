@@ -2,8 +2,8 @@
 
 === Bearbeitet von
 
-* Sophie-Marie Ordelman
-* Salomon Häseli
+* Sophie-Marie Ordelman, sophiemarie.ordelman@students.fhnw.ch
+* Salomon Häseli, salomon.haeseli@students.fhnw.ch
 
 Link zu Implementationshilfe: https://docs.google.com/document/d/19v2BNV63JT0GxNeXNWUSkxGXE9CN0q0TP9wstz3knZQ/edit?usp=sharing
 
