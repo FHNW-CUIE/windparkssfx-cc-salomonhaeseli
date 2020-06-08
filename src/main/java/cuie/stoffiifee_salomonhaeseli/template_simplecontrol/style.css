@@ -14,6 +14,13 @@
     -fx-fill           : transparent;
 }
 
+.simple-control .bar-background{
+    -fx-stroke         : #d3f1e1;
+    -fx-stroke-width   : 15;
+    -fx-stroke-line-cap: round;
+    -fx-fill           : transparent;
+}
+
 .simple-control .currentMwh2015Arc {
     -fx-stroke         : #CC3D86;
     -fx-stroke-width   : 15;

@@ -31,6 +31,7 @@ import javafx.util.converter.NumberStringConverter;
  * Dieses Dashboard zeigt die produzierte Strommenge des selektierten Windrades in Relation zu der gesamt
  * produzierten Strommgende an.
  * Jeder Kreis kann die produzierte Strommenge für das entsprechende Jahr bearbeiten.
+ * Im Hintergrund wird ein kreis für die Gesamtproduktion angezeigt, der "aktive" Kreis stellt die Summe des aktuell selektierten Windrades dar.
  * Zentriert wird der in einem Button der Status des Windrads angezeigt (in Betrieb, ausser Betrieb) und kann über selbigen Button bearbeitet werden.
  *
  * @author Sophie-Marie Ordelman
@@ -62,6 +63,7 @@ public class SpinningControl extends Region {
     private Circle thumb2016;
     private Circle thumb2017;
     private Circle thumb2018;
+    private Circle barBackground;
     private Arc maxMwhArc;
     private Arc currentMwh2015Arc;
     private Arc currentMwh2016Arc;
@@ -135,9 +137,9 @@ public class SpinningControl extends Region {
         double radius2017 = radius2016 - 20;
         double radius2018 = radius2017 - 20;
 
-        maxMwhArc = new Arc(centerX, centerY, radius, radius, 0, 360.0);
+        maxMwhArc = new Arc(centerX, centerY, radius, radius, 0, 0);
         maxMwhArc.getStyleClass().add("maxMwhArc");
-        maxMwhArc.setType(ArcType.CHORD);
+        maxMwhArc.setType(ArcType.OPEN);
 
         currentMwh2015Arc = new Arc(centerX, centerY, radius2015, radius2015, +90, 180);
         currentMwh2015Arc.getStyleClass().add("currentMwh2015Arc");
@@ -153,6 +155,9 @@ public class SpinningControl extends Region {
 
         currentMwh2018Arc = new Arc(centerX, centerY, radius2018, radius2018, +90, 180);
         currentMwh2018Arc.getStyleClass().add("currentMwh2018Arc");
+
+        barBackground = new Circle(centerX, centerY, radius);
+        barBackground.getStyleClass().add("bar-background");
 
         thumb2015 = new Circle(centerX, centerY, 6);
         thumb2015.getStyleClass().add("thumb2015");
@@ -209,7 +214,7 @@ public class SpinningControl extends Region {
         hBox.getChildren().addAll(maxMwhLabel, maxMwhValue, label2015,label2016,label2017,label2018);
 
         drawingPane.getChildren()
-                .addAll(maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc,
+                .addAll(barBackground, maxMwhArc, currentMwh2015Arc, currentMwh2016Arc, currentMwh2017Arc,
                         currentMwh2018Arc, thumb2015, thumb2016, thumb2017, thumb2018, operatingButton, hBox);
 
         getChildren().add(drawingPane);
@@ -275,6 +280,9 @@ public class SpinningControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2015Arc.setLength(-arcSize);
 
+            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
+            maxMwhArc.setLength(-maxMwharcSize);
+
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 35,
                     arcSize);
             thumb2015.setCenterX(p.getX());
@@ -284,6 +292,9 @@ public class SpinningControl extends Region {
         currentMwh2016Property().addListener(((observable, oldValue, newValue) -> {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2016Arc.setLength(-arcSize);
+
+            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
+            maxMwhArc.setLength(-maxMwharcSize);
 
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 55,
                     arcSize);
@@ -295,6 +306,9 @@ public class SpinningControl extends Region {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2017Arc.setLength(-arcSize);
 
+            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
+            maxMwhArc.setLength(-maxMwharcSize);
+
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 75,
                     arcSize);
             thumb2017.setCenterX(p.getX());
@@ -304,6 +318,9 @@ public class SpinningControl extends Region {
         currentMwh2018Property().addListener(((observable, oldValue, newValue) -> {
             double arcSize = valueToAngle(newValue.doubleValue(), 0, getMaxMwh());
             currentMwh2018Arc.setLength(-arcSize);
+
+            double maxMwharcSize = valueToAngle(currentMwh2015.get()+currentMwh2016.get()+currentMwh2017.get()+currentMwh2018.get(), 0, getMaxMwh());
+            maxMwhArc.setLength(-maxMwharcSize);
 
             Point2D p = pointOnCircle(ARTBOARD_WIDTH * 0.5, ARTBOARD_HEIGHT * 0.5, (ARTBOARD_WIDTH * 0.5) - 95,
                     arcSize);
