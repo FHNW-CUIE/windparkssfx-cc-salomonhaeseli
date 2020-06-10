@@ -9,7 +9,7 @@ Link zu Implementationshilfe: https://docs.google.com/document/d/19v2BNV63JT0GxN
 
 === Integriert in die OOP2-Projekte von
 
-* *_Ergänzen Sie hier welche OOP2-Teams Ihr Projekt erfolgreich integriert haben._*
+* Wissen wir nicht, da kein Feedback nach Postersession erhalten. Studenten haben unsere Dokus angeschaut, wir wissen aber nicht ob sies implementiert haben.
 
 === Abgabe
 
